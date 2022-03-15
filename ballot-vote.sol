@@ -1,4 +1,4 @@
-pragma solidity >= 0.7.0 < 0.9.0
+pragma solidity >= 0.7.0 < 0.9.0;
 
 // making a voting contract
 
@@ -15,7 +15,7 @@ contract Ballot {
     // voters: voted, access to vote, vote index
 
     struct Voter {
-        uint vote
+        uint vote;
         bool voted;
         uint weight;
     }
@@ -32,18 +32,18 @@ contract Ballot {
 
     address public chairperson;
 
-    constructor(bytes32 memory proposalNames) {
+    constructor(bytes32[] memory proposalNames) {
         // msg.sender = is a global variable that states the person who is currently connecting to the contract.
         chairperson = msg.sender;
 
         // add 1 to chairperson weight
         voters[chairperson].weight = 1;
-        
+
         // add proposal names to smart contract upon deployment
         for(uint i = 0; i < proposalNames.length; i++) {
             proposals.push(Proposal({
                 name: proposalNames[i],
-                voteCount: 0;
+                voteCount: 0
             }));
         }
     }

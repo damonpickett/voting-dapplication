@@ -57,7 +57,7 @@ contract Ballot {
         require(!voters[voter].voted,
         'The voter has already voted');
         require(voters[voter].weight == 0);
-        voters[voter].weight == 1;
+        voters[voter].weight = 1;
     }
 
     // function for voting
@@ -72,4 +72,22 @@ contract Ballot {
     }
 
     // function for showing results
+
+    // function that show winning proposal by integer
+
+    function winningProposal() public view returns (uint winningProposal_) {
+        uint winningVoteCount = 0;
+        for(uint i = 0; i < proposals.length; i++) {
+            if(proposals[i].voteCount > winningVoteCount) {
+                winningVoteCount = proposals[i].voteCount;
+                winningProposal_ = i;
+            }
+        }
+    }
+
+    // function that shows winner by name
+
+    function winningName() public view returns (bytes32 winningName_) {
+        winningName_ = proposals[winningProposal()].name;
+    }
 }

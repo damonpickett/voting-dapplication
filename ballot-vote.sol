@@ -47,4 +47,20 @@ contract Ballot {
             }));
         }
     }
+
+    // function to authenticate voters
+
+    function giveRightToVote(address voter) public {
+        require(msg.sender == chairperson,
+                'Only the Chairperson can give access to vote');
+        // require they haven't voted yet
+        require(!voters[voter].voted,
+        'The voter has already voted');
+        require(voters[voter].weight == 0);
+        voters[voter].weight == 1;
+    }
+
+    // function for voting
+
+    // function for showing results
 }

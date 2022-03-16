@@ -62,5 +62,14 @@ contract Ballot {
 
     // function for voting
 
+    function vote(uint proposal) public {
+        Voter storage sender = voters[msg.sender];
+        require(sender.weight != 0, 'Has no right to vote');
+        require(!sender.voted, 'Already voted');
+        sender.voted = true;
+        sender.vote = proposal;
+        proposals[proposal].voteCount += sender.weight;
+    }
+
     // function for showing results
 }
